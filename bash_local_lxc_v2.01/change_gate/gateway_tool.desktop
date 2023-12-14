@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Terminal=true
+Name=Gateway Tool
+Exec=python3 /opt/change_gate.py
+Comment=Configure Gateway IP
+Categories=Utility;

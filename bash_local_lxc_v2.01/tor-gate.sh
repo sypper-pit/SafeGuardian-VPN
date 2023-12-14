@@ -1,0 +1,73 @@
+#!/bin/bash
+
+# Проверяем, были ли предоставлены IP-адрес и уникальный номер
+if [ "$#" -ne 2 ]; then
+    echo "Использование: $0 <IP-адрес> <Уникальный номер>"
+    exit 1
+fi
+
+# IP-адрес и уникальный номер, предоставленные в качестве аргументов
+_ip_address="$1"
+_unique_number="$2"
+
+# Имя контейнера, включающее уникальный номер
+_container_name="tor-gate$_unique_number"
+
+# Остальные переменные
+_trans_port="9040"
+_inc_if="eth1"
+
+# Запускаем контейнер LXC с уникальным именем на базе Ubuntu 22.04
+lxc launch images:ubuntu/22.04 $_container_name
+
+# Устанавливаем настройки сети в контейнере с учетом IP-адреса
+lxc exec $_container_name -- bash -c "echo -e '[Match]\nName=eth1\n\n[Network]\nAddress=$_ip_address/24' > /etc/systemd/network/10-eth1.network"
+
+# Перезапускаем systemd-networkd для применения настроек сети
+lxc exec $_container_name -- systemctl restart systemd-networkd
+
+# Обновляем список пакетов и устанавливаем необходимые пакеты
+lxc exec $_container_name -- apt update
+lxc exec $_container_name -- apt install -y tor iptables iptables-persistent curl
+
+# Проверяем работу Tor и соединение с внешним миром
+lxc exec $_container_name -- torify curl ifconfig.io
+
+# Проверяем статус Tor до внесения изменений в torrc
+echo "Проверка статуса Tor до изменений..."
+lxc exec $_container_name -- systemctl status tor
+
+# Добавляем конфигурацию в torrc
+lxc exec $_container_name -- bash -c "echo -e 'VirtualAddrNetworkIPv4 10.192.0.0/10\nAutomapHostsOnResolve 1\nTransPort $_ip_address:9040\nDNSPort $_ip_address:5353' >> /etc/tor/torrc"
+
+# Перезапускаем Tor для применения новой конфигурации
+lxc exec $_container_name -- systemctl restart tor
+
+# Проверяем статус Tor после внесения изменений в torrc
+echo "Проверка статуса Tor после изменений..."
+lxc exec $_container_name -- systemctl status tor
+
+# Создаем и применяем правила iptables внутри контейнера
+
+# Очистка всех существующих правил iptables
+echo "Очистка всех существующих правил iptables..."
+lxc exec $_container_name -- bash -c "iptables -F"
+lxc exec $_container_name -- bash -c "iptables -t nat -F"
+
+# Перенаправление UDP трафика, предназначенного для порта 53, на порт 5353
+echo "Перенаправление UDP трафика для DNS (порт 53) на порт 5353..."
+lxc exec $_container_name -- bash -c "iptables -t nat -A PREROUTING -i $_inc_if -p udp --dport 53 -j REDIRECT --to-ports 5353"
+
+# Перенаправление UDP трафика, предназначенного для порта 5353, на порт 5353
+echo "Перенаправление UDP трафика для порта 5353 на порт 5353..."
+lxc exec $_container_name -- bash -c "iptables -t nat -A PREROUTING -i $_inc_if -p udp --dport 5353 -j REDIRECT --to-ports 5353"
+
+# Перенаправление входящего TCP трафика на порт для прозрачной работы Tor
+echo "Перенаправление входящего TCP трафика на Tor TransPort ($_trans_port)..."
+lxc exec $_container_name -- bash -c "iptables -t nat -A PREROUTING -i $_inc_if -p tcp --syn -j REDIRECT --to-ports $_trans_port"
+
+# Сохраняем правила iptables
+echo "Сохранение правил iptables..."
+lxc exec $_container_name -- sh -c 'iptables-save > /etc/iptables/rules.v4'
+
+echo "Настройка $_container_name завершена."
