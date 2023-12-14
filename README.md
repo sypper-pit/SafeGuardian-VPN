@@ -32,3 +32,6 @@ SafeGuardian VPN предлагает продвинутый уровень ко
 
 ### Смена default gateway
 Инструкция в папке change_gate
+
+### Просмотр всех ip 
+`lxc ls`
