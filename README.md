@@ -23,9 +23,12 @@ Copy the VPN configuration files into the appropriate folders:
 - OpenVPN without password: `openvpn/1/client.ovpn`
 
 **Important:** Ensure that the configurations for each VPN are different to avoid errors.
+
 passwd.txt:
-`<login>
-<password>`
+```
+<login>
+<password>
+```
 
 ### 4. Launch and Deployment
 After copying all the necessary configuration files, run `bash ./setup.sh` to deploy the VPN containers.
@@ -69,6 +72,12 @@ SafeGuardian VPN – это мощный инструмент для созда�
 - OpenVPN без пароля: `openvpn/1/client.ovpn`
 
 **Важно:** Убедитесь, что конфигурации для каждого VPN отличаются, чтобы избежать ошибок.
+
+passwd.txt:
+```
+<login>
+<password>
+```
 
 ### 4. Запуск и Развертывание
 После копирования всех необходимых файлов конфигурации, запустите `bash ./setup.sh` для развертывания контейнеров VPN.
