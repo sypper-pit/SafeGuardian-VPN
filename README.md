@@ -23,6 +23,9 @@ Copy the VPN configuration files into the appropriate folders:
 - OpenVPN without password: `openvpn/1/client.ovpn`
 
 **Important:** Ensure that the configurations for each VPN are different to avoid errors.
+passwd.txt:
+`<login>
+<password>`
 
 ### 4. Launch and Deployment
 After copying all the necessary configuration files, run `bash ./setup.sh` to deploy the VPN containers.
