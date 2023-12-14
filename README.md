@@ -1,5 +1,8 @@
 # SafeGuardian VPN - An Advanced Whonix Alternative Based on LXC Containers
 
+## Run on ubuntu
+need ubuntu 22.04
+
 ## Overview
 SafeGuardian VPN is a powerful tool for creating and managing VPN servers in LXC containers, inspired by the functionality of Whonix. This project offers flexible VPN connection settings with support for WireGuard, OpenVPN (with and without a password), and Tor, ensuring a high level of anonymity and security.
 
@@ -48,6 +51,9 @@ other IPs can be found in the list.
 
 ___
 # SafeGuardian VPN - Расширенный Аналог Whonix на основе LXC контейнеров
+
+## Запускается на ubuntu
+вас необходимо на хосте иметь ubuntu 22.04
 
 ## Обзор
 SafeGuardian VPN – это мощный инструмент для создания и управления VPN-серверами в LXC контейнерах, вдохновленный функциональностью Whonix. Проект предоставляет гибкость настройки VPN-подключений с поддержкой WireGuard, OpenVPN (с паролем и без), и Tor, обеспечивая высокий уровень анонимности и безопасности.
