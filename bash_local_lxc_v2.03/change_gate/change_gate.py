@@ -9,7 +9,7 @@ def is_valid_ip(ip):
 
 def apply_ip(new_ip, root_password):
     if not is_valid_ip(new_ip):
-        return "Неверный IP-адрес", False
+        return "Wrong IP-address", False
 
     # Обновленные команды для изменения настроек сети
     commands = [
@@ -25,35 +25,35 @@ def apply_ip(new_ip, root_password):
         check_cmd = "ip route | grep '^default'"
         result = subprocess.check_output(check_cmd, shell=True).decode()
         if new_ip in result:
-            return "IP-адрес добавлен в default gateway", True
+            return "IP-address add as default gateway", True
         else:
-            return "Ошибка добавления IP-адреса", False
+            return "Error! create IP-address", False
     except subprocess.CalledProcessError:
-        return "Ошибка выполнения команды проверки", False
+        return "Error: execute the check command", False
 
 def get_external_ip():
     try:
         with urllib.request.urlopen("https://api.ipify.org") as response:
             return response.read().decode('utf-8')
     except Exception as e:
-        return f"Ошибка получения внешнего IP: {e}"
+        return f"Error getting external IP: {e}"
 
 def main():
     while True:
-        new_ip = input("Введите IP-адрес gateway: ")
-        root_password = getpass.getpass("Введите ваш пароль: ")
+        new_ip = input("Enter IP-address you gateway: ")
+        root_password = getpass.getpass("Enter you password(need for sudo, not root): ")
 
         result, success = apply_ip(new_ip, root_password)
         print(result)
         if success:
             break
         else:
-            print("Пожалуйста, попробуйте снова.")
+            print("Please try again!")
 
     external_ip = get_external_ip()
-    print(f"Внешний IP: {external_ip}")
+    print(f"You external IP: {external_ip}")
 
-    input("Нажмите любую клавишу для выхода...")
+    input("Press |Enter| for END...")
 
 if __name__ == "__main__":
     main()
