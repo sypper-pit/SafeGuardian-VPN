@@ -1,5 +1,5 @@
 # SafeGuardian VPN - An Advanced Whonix Alternative Based on LXC Containers
-
+![logo](logo.png =250x)
 ## If you want help me. Send donats:
 
 Dogecoin (DOGE): `D6kb8jcVXYTi82nsoACAYKYhtA5EJ4D9Jg`
