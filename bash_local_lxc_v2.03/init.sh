@@ -8,7 +8,7 @@ for dir in */ ; do
     fi
 
     # Спрашиваем, сколько копий нужно
-    echo -n "Сколько копий ${dir%/} хотите? "
+    echo -n "How many ${dir%/} you want runs?(0 not create): "
     read copies
 
     # Проверяем, что введено число и оно больше 0
