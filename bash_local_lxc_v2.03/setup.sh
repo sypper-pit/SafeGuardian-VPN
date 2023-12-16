@@ -33,7 +33,7 @@ execute_script() {
     local base_ip=$2
     local copies
 
-    echo -n "Сколько копий ${script} хотите? "
+    echo -n "How many ${script} you want start? (if send 0 - not run): "
     read copies
 
     if [[ "$copies" =~ ^[0-9]+$ ]] && [ "$copies" -gt 0 ]; then
