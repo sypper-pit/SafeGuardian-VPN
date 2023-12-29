@@ -1,16 +1,35 @@
-1) Install:
-   bash ./install.sh
-3) Run to transfer to an encrypted container:
-   bash ./init.sh
+# Encrypted Container Transfer
 
-To connect after rebooting the desired image: 
-   bash ./mount.sh
-___
+## Install:
+```bash
+bash ./install.sh
+```
 
-1) Устанавливаем:
-   bash ./install.sh
-3) Запускаем для переноса в шифрованный контейнер:
-   bash ./init.sh
+## Transfer to an Encrypted Container:
+```bash
+bash ./init.sh
+```
 
-Для подключения после перезагрузки нужного образа: 
-   bash ./mount.sh
+## Connect After Rebooting the Desired Image:
+```bash
+bash ./mount.sh
+```
+
+---
+
+# Перенос в шифрованный контейнер
+
+## Установка:
+```bash
+bash ./install.sh
+```
+
+## Перенос в шифрованный контейнер:
+```bash
+bash ./init.sh
+```
+
+## Подключение после перезагрузки нужного образа:
+```bash
+bash ./mount.sh
+```
