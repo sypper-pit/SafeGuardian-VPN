@@ -12,6 +12,8 @@ bash ./init.sh
 
 Are you sure? (Type 'yes' in capital letters):YES
 
+Обязательно БОЛЬШИМИ БУКВАМИ
+
 ## Connect After Rebooting the Desired Image:
 ```bash
 bash ./mount.sh
