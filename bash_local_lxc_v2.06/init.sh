@@ -2,8 +2,8 @@
 
 # Перебираем каталоги
 for dir in */ ; do
-    # Пропускаем каталог change_gate
-    if [ "$dir" == "change_gate/" ]; then
+    # Пропускаем каталог change_gate и crypt
+    if [ "$dir" == "change_gate/" ] || [ "$dir" == "crypt/" ]; then
         continue
     fi
 
