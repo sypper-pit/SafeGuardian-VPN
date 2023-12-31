@@ -44,7 +44,7 @@ Execute `bash ./init.sh` to prepare the necessary settings.
 
 ### 3. VPN Configuration
 Copy the VPN configuration files into the appropriate folders:
-- WireGuard: `wireguard/1/wg.conf`
+- WireGuard: `wireguard/1/wg-client.conf`
 - OpenVPN with password: `openvpn-pass/1/client.ovpn` and `openvpn-pass/1/passwd.txt`
 - OpenVPN without password: `openvpn/1/client.ovpn`
 
@@ -96,7 +96,7 @@ SafeGuardian VPN – это мощный инструмент для созда�
 
 ### 3. Конфигурация VPN
 Скопируйте конфигурационные файлы VPN в соответствующие папки:
-- WireGuard: `wireguard/1/wg.conf`
+- WireGuard: `wireguard/1/wg-client.conf`
 - OpenVPN с паролем: `openvpn-pass/1/client.ovpn` и `openvpn-pass/1/passwd.txt`
 - OpenVPN без пароля: `openvpn/1/client.ovpn`
 
