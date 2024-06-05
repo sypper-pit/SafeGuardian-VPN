@@ -98,14 +98,15 @@ To enter the container, use:
 Then, you can install your applications for Debian 12 in the standard way through the console.
 
 If you need to forward a port, for example, for SSH (install SSH in the container) and execute:
-
-    `lxc config device add desktop1 eth-ssh proxy listen=tcp:0.0.0.0:2222 connect=tcp:127.0.0.1:22`
+```
+lxc config device add desktop1 eth-ssh proxy listen=tcp:0.0.0.0:2222 connect=tcp:127.0.0.1:22
+```
 ### To connect specifically to the container, use port 2222 and the IP of your main host.
 
 If you need to forward a port, for example, for VNC (install VNC in the container) and execute:
-
-    `lxc config device add desktop1 eth-vnc proxy listen=tcp:0.0.0.0:5900 connect=tcp:127.0.0.1:5900`
-
+```
+lxc config device add desktop1 eth-vnc proxy listen=tcp:0.0.0.0:5900 connect=tcp:127.0.0.1:5900
+```
 Further steps follow the same pattern.
 
 ***Attention:*** When port forwarding, be sure to specify unique names `eth-<name>` 
